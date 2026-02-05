@@ -1,6 +1,7 @@
 package com.example.mylearning.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,6 +23,12 @@ public class UserService {
 	}
 	
 	public User CreateUser(User user) {
+		Optional<User> user1 = repo.findById(user.getRollno());
+		if(user1 != null) {
+	//		throw new UserExistsException("User already exists in repository");
+		}
+
+	
 		return repo.save(user);
 	}
 	
