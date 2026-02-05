@@ -28,7 +28,15 @@ public class UserService {
 	public User updateUser(Long rollno, String name) {
 		
 		User user = repo.getById(rollno);
-		user.setFirstname(name);;
+		user.setFirstname(name);
+		System.out.print(user.getCity()); 
+		// PUT sets null -> stays NULL 
+		// PATCH ignores null -> stays NULL
 		return repo.save(user);
+	}
+	
+   public boolean removeUser(Long rollno) {
+	   repo.deleteById(rollno);
+		return true;
 	}
 }

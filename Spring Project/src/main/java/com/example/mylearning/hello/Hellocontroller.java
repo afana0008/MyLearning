@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -47,24 +49,43 @@ public class Hellocontroller {
 		return new UserDetails("Afana", "fathima", "Chennai");
 	}
 
-	@GetMapping("/get")
+	@GetMapping("/get") //Read data
 	public List<User> getAll() {
 		return service.getAll();
 	}
 	
-	@PostMapping("/create")
+	@PostMapping("/create") // Create or submit data
 	public ResponseEntity<User> createUser(@RequestBody User user) {
 		User Createuser=service.CreateUser(user);
 		return ResponseEntity.status(HttpStatus.CREATED).body(Createuser);
 	}
 	
-	@PutMapping("/update/{id}")
-	public ResponseEntity<String>  UpdateUser(@PathVariable("id") long rollno, @RequestParam String name) {
+	@PutMapping("/update/{id}") //Update entire resource
+	public ResponseEntity<String>  UpdateUserPut(@PathVariable("id") long rollno, @RequestParam String name) {
 		User Updateuser=service.updateUser(rollno, name);
 		String result = null;
 		if(Updateuser!=null) {
-			result="Updated";
+			result="Put Updated";
 		}
 		return ResponseEntity.ok(result);
+	}
+	
+	@PatchMapping("/update/{id}") // Update part of resource
+	public ResponseEntity<String>  UpdateUserPatch(@PathVariable("id") long rollno, @RequestParam String name) {
+		User Updateuser=service.updateUser(rollno, name);
+		String result = null;
+		if(Updateuser!=null) {
+			result="patch Updated";
+		}
+		return ResponseEntity.ok(result);
+	}
+	
+	@DeleteMapping("/remove/{id}") //Remove data
+	public ResponseEntity<String>  UpdateUserPatch(@PathVariable("id") long rollno) {
+		boolean remove=service.removeUser(rollno);
+		String response = null;
+		if(remove)
+			response="Remove successfully";
+		return ResponseEntity.ok(response);
 	}
 }
