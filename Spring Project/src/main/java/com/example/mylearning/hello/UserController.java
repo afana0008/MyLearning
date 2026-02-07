@@ -9,6 +9,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,10 +17,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.example.mylearning.Exceptions.UserNotFoundException;
 import com.example.mylearning.entities.User;
 import com.example.mylearning.services.UserService;
 
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Min;
+
 @Controller
+@Validated
 public class UserController {
 
 	@Autowired
@@ -28,9 +34,14 @@ public class UserController {
 		this.userservice=userservice;
 	}
 
-	@GetMapping("/get/{id}")
-	public ResponseEntity<User> getUserById(@PathVariable("id") Long rollno) {
+	@GetMapping("/get/{id}") 
+	public ResponseEntity<User> getUserById( @PathVariable("id") Long rollno) { //@Min(1) if I adding here it validate the inputs, or else throw ConstraintViolationException
 		System.out.println("rollno"+rollno);
+		if(rollno==0) {
+			throw new IllegalArgumentException("Invalid ID");
+		}else if(rollno<0) {
+			throw new UserNotFoundException("User not found");
+		}
 		User Createuser = userservice.getUserById(rollno)
         .orElseThrow(() ->
                 new ResponseStatusException(
@@ -43,7 +54,7 @@ public class UserController {
 
 
 	@PostMapping("/create")
-	public ResponseEntity<Void> createUser( @RequestBody User user, UriComponentsBuilder builder) {
+	public ResponseEntity<Void> createUser(@Valid @RequestBody User user, UriComponentsBuilder builder) {
 		try {
 			userservice.CreateUser(user);
 			HttpHeaders headers = new HttpHeaders();
@@ -58,7 +69,6 @@ public class UserController {
 	        );
 	    }
 	}
-
 		
 	
 }
