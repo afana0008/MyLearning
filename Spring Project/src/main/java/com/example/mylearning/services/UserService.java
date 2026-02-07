@@ -46,4 +46,11 @@ public class UserService {
 	   repo.deleteById(rollno);
 		return true;
 	}
+
+   
+
+   public Optional<User> getUserById(Long rollno) {
+	
+	return repo.findById(rollno);
+   }
 }

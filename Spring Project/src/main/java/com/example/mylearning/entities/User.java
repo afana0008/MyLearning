@@ -1,10 +1,13 @@
 package com.example.mylearning.entities;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "users")
@@ -14,8 +17,15 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long rollno;
 
+    @Size(min = 2, max = 50,  message = "FirstName should have atleast 2 characters")
+    @NotEmpty(message = "Username is Mandatory field. Please provide username")
+	@Column(name = "FIRST_NAME", length = 50, nullable = false)
     private String firstname;
+    
+    @Column(name = "LAST_NAME", length = 50, nullable = false)
     private String lastname;
+    
+    @Column(name = "CITY", length = 50)
     private String city;
 
     //No Argument Field Constructor is mandatory
