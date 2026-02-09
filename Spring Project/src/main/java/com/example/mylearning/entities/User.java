@@ -2,6 +2,9 @@ package com.example.mylearning.entities;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -15,6 +18,7 @@ import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "users")
+//@JsonIgnoreProperties({"firstname"})
 public class User {
 
     @Id
@@ -31,6 +35,7 @@ public class User {
     private String lastname;
     
     @Column(name = "CITY", length = 50)
+    @JsonIgnore
     private String city;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
