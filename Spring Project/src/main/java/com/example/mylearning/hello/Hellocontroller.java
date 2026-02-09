@@ -1,8 +1,11 @@
 package com.example.mylearning.hello;
 
 import java.util.List;
+import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,6 +31,10 @@ public class Hellocontroller {
 	
 	@Autowired
 	private final UserService service;
+	
+	@Autowired
+	private ResourceBundleMessageSource messageSource;
+
 	
 	public Hellocontroller(UserService service) {
 		this.service=service;
@@ -88,4 +96,18 @@ public class Hellocontroller {
 			response="Remove successfully";
 		return ResponseEntity.ok(response);
 	}
+	
+	@GetMapping("/hello-int")
+	public String getMessagesInI18NFormat(Locale locale) {
+	    return messageSource.getMessage("label.hello", null, locale.FRENCH);
+	}
+
+	
+	
+	@GetMapping("/hello-int2")
+	public String getMessagesInI18NFormat2() {
+		return messageSource.getMessage("label.hello", null, LocaleContextHolder.getLocale().FRANCE);
+		
+	}
+
 }
