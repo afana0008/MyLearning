@@ -2,7 +2,7 @@ package com.example.mylearning.Exceptions;
 
 import java.util.Date;
 
-import org.jspecify.annotations.Nullable;
+
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -14,14 +14,16 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+import com.example.mylearning.Exceptions.CustomErrorDetails;
 
 import jakarta.validation.ConstraintViolationException;
+import jakarta.validation.constraints.Null;
 
 @ControllerAdvice
 public class CustomHandlerException extends ResponseEntityExceptionHandler{
 	
 	@Override
-	protected @Nullable ResponseEntity<Object> handleMethodArgumentNotValid(
+	protected @Null ResponseEntity<Object> handleMethodArgumentNotValid(
 			MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
 		logger.info("handleMethodArgumentNotValid");
 		return handleExceptionInternal(ex, null, headers, status, request);

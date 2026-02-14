@@ -1,18 +1,9 @@
 package com.example.mylearning.dto;
 
-import java.util.List;
-
-import com.example.mylearning.entities.Department;
-
-
-
-public class UserMmDto {
-	
+public class UserDtoV1 {
 	private long rollno;
 	private String firstname;
 	private String lastname;
-	private String city;
-	private List<Department> departments;
 	public long getRollno() {
 		return rollno;
 	}
@@ -31,19 +22,6 @@ public class UserMmDto {
 	public void setLastname(String lastname) {
 		this.lastname = lastname;
 	}
-	public String getCity() {
-		return city;
-	}
-	public void setCity(String city) {
-		this.city = city;
-	}
-	public List<Department> getDepartments() {
-		return departments;
-	}
-	public void setDepartments(List<Department> departments) {
-		this.departments = departments;
-	}
-	
 	
 	
 }

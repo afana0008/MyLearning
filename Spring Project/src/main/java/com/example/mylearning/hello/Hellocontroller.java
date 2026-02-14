@@ -22,11 +22,19 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.mylearning.entities.User;
 import com.example.mylearning.services.UserService;
+
+import io.swagger.v3.oas.annotations.Hidden;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 import org.springframework.web.bind.annotation.PutMapping;
 
 
 @RestController
 @RequestMapping("/login")
+@Tag(name = "User API")
 public class Hellocontroller {
 	
 	@Autowired
@@ -51,7 +59,7 @@ public class Hellocontroller {
 		return new UserDetails("Afana", "fathima", "Chennai").toString();
 	}
 	
-	
+	@Hidden
 	@GetMapping("/hello-bean")
 	public UserDetails helloBean() {
 		return new UserDetails("Afana", "fathima", "Chennai");
@@ -59,6 +67,13 @@ public class Hellocontroller {
 
 	@GetMapping("/get") //Read data
 	public List<User> getAll() {
+		return service.getAll();
+	}
+	
+	@GetMapping("/swagger/get/{id}") //Read data
+	@Operation(summary = "Get user by ID")
+    @ApiResponse(responseCode = "200", description = "Success")
+	public List<User> getAllwithParam(@Parameter(description = "User ID", example = "1") @PathVariable("id") Long id) {
 		return service.getAll();
 	}
 	

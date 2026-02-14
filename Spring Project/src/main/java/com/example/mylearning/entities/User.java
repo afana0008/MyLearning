@@ -5,6 +5,7 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -19,11 +20,13 @@ import jakarta.validation.constraints.Size;
 @Entity
 @Table(name = "users")
 //@JsonIgnoreProperties({"firstname"})
+@Schema(description = "User entity")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ROll_NO", nullable = false)
+    @Schema(description = "Roll No", example = "100")
     private long rollno;
 
     @Size(min = 2, max = 50,  message = "FirstName should have atleast 2 characters")

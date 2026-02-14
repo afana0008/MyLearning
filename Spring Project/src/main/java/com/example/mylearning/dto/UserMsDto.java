@@ -1,54 +1,49 @@
 package com.example.mylearning.dto;
 
+import java.util.List;
+
+import com.example.mylearning.entities.Department;
+
 public class UserMsDto {
 	
-	private Long userid;
-	private String username;
-	private String emailaddress;
-	private String rolename;
-	
-	public UserMsDto() {
-
+	private long rollno;
+	private String userFirstName;
+	private String lastname;
+	private String userCity;
+	private List<Department> departments;
+	public long getRollno() {
+		return rollno;
 	}
-	
-	public UserMsDto(Long userid, String username, String emailaddress, String rolename) {
-		super();
-		this.userid = userid;
-		this.username = username;
-		this.emailaddress = emailaddress;
-		this.rolename = rolename;
-	}
-
-
-	public Long getUserid() {
-		return userid;
-	}
-	public void setUserid(Long userid) {
-		this.userid = userid;
-	}
-	public String getUsername() {
-		return username;
-	}
-	public void setUsername(String username) {
-		this.username = username;
-	}
-	public String getEmailaddress() {
-		return emailaddress;
-	}
-	public void setEmailaddress(String emailaddress) {
-		this.emailaddress = emailaddress;
-	}
-
-
-	public String getRolename() {
-		return rolename;
-	}
-
-
-	public void setRolename(String rolename) {
-		this.rolename = rolename;
+	public void setRollno(long rollno) {
+		this.rollno = rollno;
 	}
 	
 	
-
+	public String getUserFirstName() {
+		return userFirstName;
+	}
+	public void setUserFirstName(String userFirstName) {
+		this.userFirstName = userFirstName;
+	}
+	public String getLastname() {
+		return lastname;
+	}
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
+	}
+	
+	public String getUserCity() {
+		return userCity;
+	}
+	public void setUserCity(String userCity) {
+		this.userCity = userCity;
+	}
+	public List<Department> getDepartments() {
+		return departments;
+	}
+	public void setDepartments(List<Department> departments) {
+		this.departments = departments;
+	}
+	
+	
 }

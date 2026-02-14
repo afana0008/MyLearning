@@ -1,8 +1,8 @@
-package com.stacksimplify.restservices.controllers;
+package com.example.mylearning.hello;
 
 import java.util.Optional;
 
-import javax.validation.constraints.Min;
+import jakarta.validation.constraints.Min;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,10 +11,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.stacksimplify.restservices.dtos.UserMmDto;
-import com.stacksimplify.restservices.entities.User;
-import com.stacksimplify.restservices.exceptions.UserNotFoundException;
-import com.stacksimplify.restservices.services.UserService;
+import com.example.mylearning.Exceptions.UserNotFoundException;
+import com.example.mylearning.dto.UserMmDto;
+import com.example.mylearning.entities.User;
+import com.example.mylearning.services.UserService;
+
+
 
 @RestController
 @RequestMapping("/modelmapper/users")
